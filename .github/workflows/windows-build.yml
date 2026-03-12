@@ -8,19 +8,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      - run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-      - run: flutter config --enable-windows-desktop
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
 
-      - run: flutter build windows
+      - name: Build Windows app
+        run: flutter build windows
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: fluffychat-windows
-          path: build/windows/runner/Release
+          path: build/windows/x64/runner/Release
