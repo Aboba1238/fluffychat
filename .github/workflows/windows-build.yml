@@ -1,4 +1,4 @@
-name: Build FluffyChat Windows
+name: Build FluffyChat Windows (Debug)
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Flutter
@@ -22,11 +22,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build app
-        run: flutter build windows --release
+      - name: Build Windows DEBUG
+        run: flutter build windows --debug
 
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
-          name: fluffychat-windows
-          path: build/windows/x64/runner/Release
+          name: fluffychat-windows-debug
+          path: build/windows/x64/runner/Debug
